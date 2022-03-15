@@ -19,9 +19,7 @@
   "homepage": "https://github.com/Baqaisooo/PharmaciesManager#readme",
   "dependencies": {
     "ejs": "^3.1.6",
-    "express": "^4.17.3",
-    "firebase": "^9.6.8",
-    "firebase-admin": "^10.0.2"
+    "express": "^4.17.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

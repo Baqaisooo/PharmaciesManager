@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     // get all pharmacies
     
 
-    res.render("./")
+    res.render("./pharmacy/homepage")
 });
 
 // Middleware 
