@@ -20,11 +20,35 @@ router.get('/', (req, res) => {
     // As an admin, the app has access to read and write all data, regardless of Security Rules
     var db = admin.database();
     var ref = db.ref("Pharmacies");
+
     ref.once("value", function(snapshot) {
-        const data = snapshot.val();
-        res.render("./pharmacy/homepage", {pharmacies:data})
+        res.render("./pharmacy/homepage", {pharmacies:snapshot.toJSON()})
     });
 
+});
+
+
+
+
+
+
+router.get('/newPharmacy', (req, res) => {
+  res.render("./pharmacy/newPharmacy")
+});
+
+
+router.post('/newPharmacy', (req, res) => {
+  console.log(req.body)
+  console.log( req.body['phone'])
+  // res.render("./pharmacy/newPharmacy")
+});
+
+
+
+
+
+router.get('/detail/:id', (req, res) => {
+  res.send(req.params.id)
 });
 
 

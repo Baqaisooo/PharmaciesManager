@@ -10,6 +10,10 @@
     <meta name="generator" content="Hugo 0.88.1">
     <title>Homepage</title>
 
+    
+    <script type="module" src="/js/active.js"></script>
+
+
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbar-static/">
 
     
@@ -33,15 +37,15 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="">Home</a>
+          <a class="nav-link active" aria-current="page" href="/pharmacy">Home</a>
         </li>
 
         <li class="nav-item ml-3">
-            <button type="button" class="btn btn-primary" style="font-weight: bold;" id="logout">Add New Pharmacy</button>
+            <a type="button" class="btn btn-primary" style="font-weight: bold;" href="/pharmacy/newPharmacy">Add New Pharmacy</a>
         </li>
       </ul>
       <form class="d-flex">
-        <button type="button" class="btn btn-danger" id="logout">Logout</button>
+        <button type="button" class="btn btn-danger" id="logout" >Logout</button>
         
       </form>
     </div>
@@ -53,38 +57,50 @@
         <h1 class="display-4">All Pharmacies</h1>
     </div>
 
-    <div class="row border border-success rounded mb-1">
-        <div class="col-md-2 text-center"><img class="logo" src="/images/Nahdi-logo.jpg" alt="Al-Nahdi Care" width="120" height="100"></div>
-        <div class="col-md-3 align-self-md-center"><strong>Al-Nahdi Care</strong></div>
-        <div class="col-md-2 align-self-md-center">
-            <div class="row">
-                <div class="col-md-6"><a href="http://"><img class="logo" src="/images/twitterIcon.png" alt="Twitter"></a></div>
-                <div class="col-md-6 "><a href="http://"><img class="logo" src="/images/instagramIcon.png" alt="Instagram"></a></div>
-            </div>
-        </div>
-        <div class="col-md-5 align-self-md-center">
-            <div class="row">
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-info" id="view">View</button>
-                </div>
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-warning" id="edit">Edit</button>
-                </div>
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-danger" id="delete">Delete</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
+
+    <% for (const pharmacykey in pharmacies) {
+     
+        const element = pharmacies[pharmacykey];
+        if (element.active) {
+        %>
+          <div class="row border border-success rounded mb-1">
+              <div class="col-md-2 text-center"><img class="logo" src="<%= element.pic %>" alt="Al-Nahdi Care" width="120" height="100"></div>
+              <div class="col-md-3 align-self-md-center"><strong> <%= element.name %> </strong></div>
+              <div class="col-md-2 align-self-md-center">
+                  <div class="row">
+                      <div class="col-md-6"><a href="https://twitter.com/<%= element.twitterAccount %>/" target="_blank"><img class="logo" src="/images/twitterIcon.png" alt="Twitter"></a></div>
+                      <div class="col-md-6 "><a href="https://www.instagram.com/<%= element.instaAccount %>/" target="_blank"><img class="logo" src="/images/instagramIcon.png" alt="Instagram"></a></div>
+                  </div>
+              </div>
+              <div class="col-md-5 align-self-md-center">
+                  <div class="row">
+                      <div class="col-md-4">
+                          <a type="button" class="btn btn-info pharmacyOptions" id="view" href="/pharmacy/detail/<%= pharmacykey %>">View</a>
+                      </div>
+                      <div class="col-md-4">
+                          <a type="button" class="btn btn-warning pharmacyOptions" id="edit">Edit</a>
+                      </div>
+                      <div class="col-md-4">
+                          <a type="button" class="btn btn-danger pharmacyOptions" id="delete">Delete</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        
+        <%
+        }
+      } { %>
+    
+    <% } %>
+     
+        
 
 
     
 </div>
-
        
 
-    <script type="module" src="/js/active.js"></script>
       
   </body>
 </html>
