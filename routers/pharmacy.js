@@ -40,11 +40,12 @@ router.get('/newPharmacy', (req, res) => {
 
 
 
-router.post('/newPharmacy', (req, res) => {
-  console.log(req.body)
-  const pharmacy = req.body.pharmacy;
-  const image = req.body.logo;
+// router.post('/newPharmacy', (req, res) => {
+//   // console.log(req.body)
+//   const pharmacy = req.body.pharmacy;
+//   const image = req.body.imgBase64;
   
+//   const storage = admin.storage()
   // const bucket = admin.storage().bucket()
 
   // console.log(bucket)
@@ -53,8 +54,12 @@ router.post('/newPharmacy', (req, res) => {
 
 
   
+  // console.log(storage.bucket().file(pharmacy+"lll.png"))
+  // .putString(image.split(',')[1], "base64", {contentType: 'image/png'})
+
+  
   // async function uploadFile() {
-  //   await bucket.upload('C:\\Users\\aboal\\OneDrive\\سطح المكتب\\logo.png', {
+  //   await bucket.upload( "/"+image , {
   //     destination: pharmacy
   //   });
   // }
@@ -63,10 +68,8 @@ router.post('/newPharmacy', (req, res) => {
 
 
 
-
-  console.log( req.body )
   // res.render("./pharmacy/newPharmacy")
-});
+// });
 
 
 
