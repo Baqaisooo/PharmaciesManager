@@ -41,25 +41,20 @@ router.get('/newPharmacy', (req, res) => {
 
 
 router.post('/newPharmacy', (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   const pharmacy = req.body.pharmacy;
-  const image = req.body.logo;
+  const image = req.body.imgBase64;
   
-  // const bucket = admin.storage().bucket()
-
-  // console.log(bucket)
-  // console.log("===========================")
-  // console.log(req.file)
-
+  const bucket = admin.storage().bucket()
 
   
-  // async function uploadFile() {
-  //   await bucket.upload('C:\\Users\\aboal\\OneDrive\\سطح المكتب\\logo.png', {
-  //     destination: pharmacy
-  //   });
-  // }
+  async function uploadFile() {
+    await bucket.upload(image, {
+      destination: pharmacy
+    });
+  }
 
-  // uploadFile().catch(console.error)
+  uploadFile().catch(console.error)
 
 
 
