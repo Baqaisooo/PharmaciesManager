@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
     <title>Add New Pharmacy</title>
 
     
@@ -41,10 +40,10 @@
         </li>
 
       </ul>
-      <form class="d-flex">
+      <div class="d-flex">
         <button type="button" class="btn btn-danger" id="logout">Logout</button>
         
-      </form>
+      </div>
     </div>
   </div>
 </nav>
@@ -55,24 +54,24 @@
     </div>
 
 
-    <form action="/pharmacy/newPharmacy" method="POST">
+    <form method="POST" action="/pharmacy/newPharmacy" >
       <br>
       <div class="row">
         <div class="form-group col-md-6">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" placeholder="Email">
+          <input type="email" class="form-control" name="email" id="email" placeholder="Email">
         </div>
         <div class="form-group col-md-6">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Password">
+          <input type="password" class="form-control" name="password" id="password" placeholder="Password">
         </div>
       </div>
 
       <br>
-      
+       
       <div class="form-group">
         <label for="Pharmacy">Pharmacy Name</label>
-        <input type="text" class="form-control" id="Pharmacy">
+        <input type="text" class="form-control" name="Pharmacy" id="Pharmacy">
       </div>
 
       <br>
@@ -80,15 +79,16 @@
       <div class="row">
         <div class="form-group col-md-4">
           <label for="insta">Instagram Account</label>
-          <input type="text" class="form-control" id="insta">
+          <input type="text" class="form-control" name="insta" id="insta">
         </div>
         <div class="form-group col-md-4">
           <label for="twitter">Twitter Account</label>
-          <input type="text" class="form-control" id="twitter">
+          <input type="text" class="form-control" name="twitter" id="twitter">
         </div>
         <div class="form-group col-md-4">
           <label for="logo">Pharmacy Logo</label>
-          <input type="file" class="form-control-file" id="logo">
+          <input type="file" class="form-control-file" name="logo" id="logo" onchange="encodeImageFileAsURL(event)">
+          <input type="text" name="imgBase64" id="imgBase64" value="" style="display: none;">
         </div>
       </div>
 
@@ -97,21 +97,21 @@
       <div class="row">
         <div class="form-group col-md-6">
           <label for="drName">Doctor Name</label>
-          <input type="text" class="form-control" id="drName">
+          <input type="text" class="form-control" name="drName" id="drName">
         </div>
         <div class="form-group col-md-6">
           <label for="phone">Phone Number</label>
-          <input type="text" class="form-control" id="phone">
+          <input type="number" class="form-control" name="phone" id="phone">
         </div>
       </div>
       
       <br><br>
-      
+       -->
       <div class="row">
         <div class="form-group col-md-4">
         </div>
         <div class="form-group col-md-4">
-          <button type="submit" class="btn btn-primary col-md-6" style="width: 100%;">Add Pharmacy</button>
+          <button type="submit" class="btn btn-primary col-md-6" style="width: 100%;" id="submitForm">Add Pharmacy</button>
         </div>
         <div class="form-group col-md-4">
         </div>
@@ -125,6 +125,26 @@
 </div>
        
 
+
+<script>
+  
+  function encodeImageFileAsURL(event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      document.getElementById("imgBase64").value = reader.result; 
+    }
+    reader.readAsDataURL(file);
+  }
+    
+</script>
+
+
+
       
   </body>
+
+
+
+
 </html>
