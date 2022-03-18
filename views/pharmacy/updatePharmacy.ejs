@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <title>Add New Pharmacy</title>
+    <title>Update Pharmacy</title>
 
     
     <script type="module" src="/js/logout.js"></script>
-    <script type="module" src="/js/addPharmacy.js"></script>
+    <script type="module" src="/js/updatePharmacy.js"></script>
 
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbar-static/">
@@ -38,6 +38,10 @@
           <a class="nav-link active" aria-current="page" href="/pharmacy">Home</a>
         </li>
 
+        <li class="nav-item ml-3">
+          <a type="button" class="btn btn-primary" style="font-weight: bold;" href="/pharmacy/newPharmacy">Add New Pharmacy</a>
+      </li>
+
       </ul>
       <div class="d-flex">
         <button type="button" class="btn btn-danger" id="logout">Logout</button>
@@ -49,7 +53,7 @@
 
 <div class="container">
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">Add New Pharmacy</h1>
+        <h1 class="display-4">Update Pharmacy Information</h1>
     </div>
 
     <div class="alert alert-danger alert-dismissible fade show mt-2" style="display: none;" id="alert" role="alert">
@@ -59,22 +63,10 @@
 
     <form >
       <br>
-      <div class="row">
-        <div class="form-group col-md-6">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" name="email" id="email" placeholder="Email">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-        </div>
-      </div>
-
-      <br>
        
       <div class="form-group">
         <label for="pharmacy">Pharmacy Name</label>
-        <input type="text" class="form-control" name="pharmacy" id="pharmacy">
+        <input type="text" class="form-control" name="pharmacy" id="pharmacy" value="<%= pharmacy.name %>">
       </div>
 
       <br>
@@ -82,19 +74,20 @@
       <div class="row">
         <div class="form-group col-md-4">
           <label for="insta">Instagram Account</label>
-          <input type="text" class="form-control" name="insta" id="insta">
+          <input type="text" class="form-control" name="insta" id="insta" value="<%= pharmacy.instaAccount %>">
         </div>
         <div class="form-group col-md-4">
           <label for="twitter">Twitter Account</label>
-          <input type="text" class="form-control" name="twitter" id="twitter">
+          <input type="text" class="form-control" name="twitter" id="twitter" value="<%= pharmacy.twitterAccount %>">
         </div>
         <div class="row col-md-4">
           <div class="form-group col-md-6">
             <label for="logo">Pharmacy Logo</label>
             <input type="file" class="form-control-file" name="logo" id="logo" onchange="loadImage(event)">
+            <input type="hidden" name="oldLogo" id="oldLogo" value="<%= pharmacy.pic %>">
           </div>
           <div class="form-group col-md-6 text-center" style="height: 62px;">
-            <img id="previewLogo" style="height: 100%;">
+            <img id="previewLogo" style="height: 100%;" src="<%= pharmacy.pic %>">
           </div>
         </div>
       </div>
@@ -104,21 +97,21 @@
       <div class="row">
         <div class="form-group col-md-6">
           <label for="drName">Doctor Name</label>
-          <input type="text" class="form-control" name="drName" id="drName">
+          <input type="text" class="form-control" name="drName" id="drName" value="<%= account.name %>">
         </div>
         <div class="form-group col-md-6">
           <label for="phone">Phone Number</label>
-          <input type="number" class="form-control" name="phone" id="phone">
+          <input type="number" class="form-control" name="phone" id="phone" value=<%= account.phone %> >
         </div>
       </div>
       
       <br><br>
-      
+       
       <div class="row">
         <div class="form-group col-md-4">
         </div>
         <div class="form-group col-md-4">
-          <button type="button" class="btn btn-primary col-md-6" style="width: 100%;" id="submitNewPharmacy">Add Pharmacy</button>
+          <button type="button" class="btn btn-primary col-md-6" style="width: 100%;" id="submitUpdatePharmacy" value="<%= accountID %> <%= account.pharmacyID %>">Update Pharmacy</button>
         </div>
         <div class="form-group col-md-4">
         </div>
@@ -140,6 +133,8 @@ var loadImage = function(event) {
     previewLogo.src = URL.createObjectURL(event.target.files[0]);
     previewLogo.onload = function() {
       URL.revokeObjectURL(previewLogo.src) // free memory
+      document.getElementById('oldLogo').value = "";
+
     }
   };
 

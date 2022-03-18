@@ -1,18 +1,19 @@
 
 
 import firebfase_app from "./firebaseConfig.js";
-import { getAuth, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js";
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-storage.js"; 
 import { getDatabase, set, ref as databaseRef, push } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js"; 
 
 
 
-const element = document.getElementById("submitNewPharmacy");
+const submitBtn = document.getElementById("submitNewPharmacy");
 
-element.addEventListener("click", submitNewPharmacy);
+submitBtn.addEventListener("click", submitNewPharmacy);
 
 function submitNewPharmacy() {
     
+
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const pharmacyName = document.getElementById("pharmacy").value;
@@ -37,7 +38,6 @@ function submitNewPharmacy() {
     .catch((error) => {
         document.getElementById("alert").style.display = "";
         document.getElementById("errormsg").innerHTML = error.message;
-        
     });
     
     
@@ -45,7 +45,6 @@ function submitNewPharmacy() {
     
     
     // upload image to storage and then get the image URL
-    var imageUrl = "";
     
     var file = document.getElementById("logo").files[0];
     
@@ -103,6 +102,9 @@ function createNewParmacyDetailAccount(drName, email, phone, pharmacyID) {
             active:true
         }
     ).then((f)=>{
+
         console.log("Added >>")
+        window.location = "/pharmacy/"
+
     });
 }
