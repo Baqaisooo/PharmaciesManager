@@ -17,10 +17,6 @@ onAuthStateChanged( auth, user => {
 
 
 
-
-
-
-
 // logout
 document.getElementById("logout").addEventListener('click', 
  function(){

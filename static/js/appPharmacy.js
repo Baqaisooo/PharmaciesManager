@@ -1,0 +1,108 @@
+
+
+import firebfase_app from "./firebaseConfig.js";
+import { getAuth, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-storage.js"; 
+import { getDatabase, set, ref as databaseRef, push } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js"; 
+
+
+
+const element = document.getElementById("submitNewPharmacy");
+
+element.addEventListener("click", submitNewPharmacy);
+
+function submitNewPharmacy() {
+    
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const pharmacyName = document.getElementById("pharmacy").value;
+    const insta = document.getElementById("insta").value;
+    const twitter = document.getElementById("twitter").value;
+    const drName = document.getElementById("drName").value;
+    const phone = document.getElementById("phone").value;
+
+
+    // --------------------------------------------------------------------
+    
+
+    const auth = getAuth(firebfase_app);
+    const storage = getStorage(firebfase_app);
+    
+    
+    // --------------------------------------------------------------------
+    
+    
+    // create new user account for pharmacy to able to login 
+    createUserWithEmailAndPassword(auth, email, password)
+    .catch((error) => {
+        document.getElementById("alert").style.display = "";
+        document.getElementById("errormsg").innerHTML = error.message;
+        
+    });
+    
+    
+    // --------------------------------------------------------------------
+    
+    
+    // upload image to storage and then get the image URL
+    var imageUrl = "";
+    
+    var file = document.getElementById("logo").files[0];
+    
+    const storage_Ref = storageRef(storage, '/Pharmacies/'+pharmacyName+'/logo');
+    
+    uploadBytes(storage_Ref, file).then(() => {
+        getDownloadURL(storage_Ref).then((url)=>
+            createNewPharmacyAccount(insta, pharmacyName,url,twitter, drName, email, phone)
+        )    
+    });
+    
+    
+    // --------------------------------------------------------------------
+    
+
+    
+
+    
+    // --------------------------------------------------------------------
+    
+
+
+}
+
+
+
+function createNewPharmacyAccount(instaAccount, name, pic, twitterAccount, drName, email, phone) {
+    const database = getDatabase(firebfase_app);
+    
+    push( databaseRef(database, 'Pharmacies/'), 
+        {
+            active: true,
+            instaAccount: instaAccount, 
+            name: name, 
+            pic: pic, 
+            twitterAccount:twitterAccount
+        }
+    ).then((pharmacy)=>{
+        createNewParmacyDetailAccount(drName, email, phone, pharmacy.key)
+    });
+}
+
+
+
+function createNewParmacyDetailAccount(drName, email, phone, pharmacyID) {
+    const database = getDatabase(firebfase_app);
+    
+    push( databaseRef(database, 'Accounts/'), 
+        {
+            email: email,
+            name: drName, 
+            phone: phone, 
+            pharmacyID:pharmacyID,
+            accountType: "PHARMACY", 
+            active:true
+        }
+    ).then((f)=>{
+        console.log("Added >>")
+    });
+}

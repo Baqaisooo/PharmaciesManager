@@ -11,6 +11,7 @@
 
     
     <script type="module" src="/js/active.js"></script>
+    <script type="module" src="/js/appPharmacy.js"></script>
 
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbar-static/">
@@ -53,8 +54,12 @@
         <h1 class="display-4">Add New Pharmacy</h1>
     </div>
 
+    <div class="alert alert-danger alert-dismissible fade show mt-2" style="display: none;" id="alert" role="alert">
+      <strong id="errormsg"></strong>
+  </div>
 
-    <form method="POST" action="/pharmacy/newPharmacy" >
+
+    <form >
       <br>
       <div class="row">
         <div class="form-group col-md-6">
@@ -70,8 +75,8 @@
       <br>
        
       <div class="form-group">
-        <label for="Pharmacy">Pharmacy Name</label>
-        <input type="text" class="form-control" name="Pharmacy" id="Pharmacy">
+        <label for="pharmacy">Pharmacy Name</label>
+        <input type="text" class="form-control" name="pharmacy" id="pharmacy">
       </div>
 
       <br>
@@ -87,8 +92,7 @@
         </div>
         <div class="form-group col-md-4">
           <label for="logo">Pharmacy Logo</label>
-          <input type="file" class="form-control-file" name="logo" id="logo" onchange="encodeImageFileAsURL(event)">
-          <input type="text" name="imgBase64" id="imgBase64" value="" style="display: none;">
+          <input type="file" class="form-control-file" name="logo" id="logo">
         </div>
       </div>
 
@@ -106,12 +110,12 @@
       </div>
       
       <br><br>
-       -->
+      
       <div class="row">
         <div class="form-group col-md-4">
         </div>
         <div class="form-group col-md-4">
-          <button type="submit" class="btn btn-primary col-md-6" style="width: 100%;" id="submitForm">Add Pharmacy</button>
+          <button type="button" class="btn btn-primary col-md-6" style="width: 100%;" id="submitNewPharmacy">Add Pharmacy</button>
         </div>
         <div class="form-group col-md-4">
         </div>
@@ -124,23 +128,6 @@
     
 </div>
        
-
-
-<script>
-  
-  function encodeImageFileAsURL(event) {
-    var file = event.target.files[0];
-    var reader = new FileReader();
-    reader.onloadend = function() {
-      document.getElementById("imgBase64").value = reader.result; 
-    }
-    reader.readAsDataURL(file);
-  }
-    
-</script>
-
-
-
       
   </body>
 

@@ -40,29 +40,6 @@ router.get('/newPharmacy', (req, res) => {
 
 
 
-router.post('/newPharmacy', (req, res) => {
-  // console.log(req.body)
-  const pharmacy = req.body.pharmacy;
-  const image = req.body.imgBase64;
-  
-  const bucket = admin.storage().bucket()
-
-  
-  async function uploadFile() {
-    await bucket.upload(image, {
-      destination: pharmacy
-    });
-  }
-
-  uploadFile().catch(console.error)
-
-
-
-
-  console.log( req.body )
-  // res.render("./pharmacy/newPharmacy")
-});
-
 
 
 
