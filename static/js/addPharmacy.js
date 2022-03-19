@@ -22,7 +22,7 @@ function submitNewPharmacy() {
     const drName = document.getElementById("drName").value;
     const phone = document.getElementById("phone").value;
 
-
+    submitBtn.disabled = true
     // --------------------------------------------------------------------
     
 
@@ -34,8 +34,23 @@ function submitNewPharmacy() {
     
     
     // create new user account for pharmacy to able to login 
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password).then(()=>{
+        
+        // upload image to storage and then get the image URL
+        
+        var file = document.getElementById("logo").files[0];
+        
+        const storage_Ref = storageRef(storage, '/Pharmacies/'+pharmacyName+'/logo');
+        
+        uploadBytes(storage_Ref, file).then(() => {
+            getDownloadURL(storage_Ref).then((url)=>
+                createNewPharmacyAccount(insta, pharmacyName,url,twitter, drName, email, phone)
+            )    
+        })
+    })
     .catch((error) => {
+        
+        submitBtn.disabled = false
         document.getElementById("alert").style.display = "";
         document.getElementById("errormsg").innerHTML = error.message;
     });
@@ -43,27 +58,6 @@ function submitNewPharmacy() {
     
     // --------------------------------------------------------------------
     
-    
-    // upload image to storage and then get the image URL
-    
-    var file = document.getElementById("logo").files[0];
-    
-    const storage_Ref = storageRef(storage, '/Pharmacies/'+pharmacyName+'/logo');
-    
-    uploadBytes(storage_Ref, file).then(() => {
-        getDownloadURL(storage_Ref).then((url)=>
-            createNewPharmacyAccount(insta, pharmacyName,url,twitter, drName, email, phone)
-        )    
-    });
-    
-    
-    // --------------------------------------------------------------------
-    
-
-    
-
-    
-    // --------------------------------------------------------------------
     
 
 
@@ -102,7 +96,8 @@ function createNewParmacyDetailAccount(drName, email, phone, pharmacyID) {
             active:true
         }
     ).then((f)=>{
-
+        
+        submitBtn.disabled = false
         console.log("Added >>")
         window.location = "/pharmacy/"
 

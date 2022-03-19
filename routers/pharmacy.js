@@ -82,8 +82,43 @@ router.get('/deletePharmacy/:pharmacyID', (req, res) => {
     }).then(()=> res.redirect("/pharmacy"))
   })
   
+});
+
+
+
+
+router.get('/viewPharmacy/:pharmacyID', (req, res) => {
+   
+  const pharmacyId = req.params.pharmacyID;
   
-  // res.render("./pharmacy/")
+  var database = admin.database();
+  
+  var ref = database.ref("Pharmacies/"+pharmacyId)
+  ref.once("value", function(pharmacySnapshot) {
+    ref = database.ref("Accounts/").orderByChild("pharmacyID").equalTo(pharmacyId)
+    
+    ref.once("value", function(accountSnapshot) {
+      res.render("./pharmacy/viewPharmacy", 
+      {
+        pharmacy:pharmacySnapshot.toJSON(), 
+        account:accountSnapshot.toJSON()[Object.keys(accountSnapshot.toJSON())[0]],
+        pharmacyID:pharmacyId
+      }
+      )
+    });
+    
+  });
+  
+});
+
+
+
+// =============================== Medicine Routers ==========================================
+
+
+  
+router.get('/addMedicine/:pharmacyID', (req, res) => {
+  res.render("./pharmacy/addMedicine", {pharmacyID:req.params.pharmacyID})
 });
 
 
@@ -92,9 +127,7 @@ router.get('/deletePharmacy/:pharmacyID', (req, res) => {
 
 
 
-router.get('/detail/:id', (req, res) => {
-  res.send(req.params.id)
-});
+
 
 
 module.exports = router

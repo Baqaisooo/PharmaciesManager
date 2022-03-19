@@ -1,0 +1,151 @@
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <title>Pharmacy Detail</title>
+
+    
+    <script type="module" src="/js/logout.js"></script>
+    <script type="module" src="/js/addMedicine.js"></script>
+
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbar-static/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+
+  </head>
+  <body>
+    
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/pharmacy">Pharmacy Manager</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/pharmacy">Home</a>
+        </li>
+
+        <li class="nav-item ml-3">
+          <a type="button" class="btn btn-primary" style="font-weight: bold;" href="/pharmacy/newPharmacy">Add New Pharmacy</a>
+      </li>
+
+      </ul>
+      <div class="d-flex">
+        <button type="button" class="btn btn-danger" id="logout">Logout</button>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+  <div class="container">
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">View Pharmacy Information</h1>
+    </div>
+    
+    
+    <div class="row border border-success rounded mb-1">
+      <div class="col-md-2 text-center align-self-md-center"><img style="width: 100%;" src="<%= pharmacy.pic %>" alt="Al-Nahdi Care" height="100"></div>
+      <div class="col-md-4 align-self-md-center">
+        <div class="row">
+          <div class="col-md-12"><strong id="pharmacy_name"><%= pharmacy.name %></strong></div>
+          <div class="col-md-6"><%= account.phone %></div>
+          <div class="col-md-6"><%= account.email %></div>
+          <div class="col-md-12 ">Dr.<%= account.name %> </div>
+        </div>
+        
+      </div>
+      <div class="col-md-3 align-self-md-center">
+        <div class="row">
+          <div class="col-md-6"><a href="https://twitter.com/<%= pharmacy.twitterAccount %>/" target="_blank"><img style="width: 100%;" src="/images/twitterIcon.png" alt="Twitter"></a></div>
+          <div class="col-md-6"><a href="https://www.instagram.com/<%= pharmacy.instaAccount %>/" target="_blank"><img style="width: 100%;" src="/images/instagramIcon.png" alt="Instagram"></a></div>
+        </div>
+      </div>
+      <div class="col-md-3 align-self-md-center">
+        <div class="row">
+          <div class="col-md-6">
+            <a type="button" class="btn btn-warning w-100" id="edit" href="/pharmacy/updatePharmacy/<%= pharmacyID %>">Update</a>
+          </div>
+          <div class="col-md-6">
+            <a type="button" class="btn btn-danger w-100"  id="delete" href="/pharmacy/deletePharmacy/<%= pharmacyID %>">Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <br>
+    <hr style="color: black;">
+    
+    <div class="pricing-header px-3 py-3 pt-md-1 pb-md-4 mx-auto">
+      <div class="col-md-10 text-left">
+        <h4 class="display-4"> Add Medicine</h4>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-3">
+          <label for="insta">Medicine Name</label>
+          <input type="text" class="form-control" name="name" id="name">
+        </div>
+        <div class="form-group col-md-2">
+          <label for="twitter">Medicine Price</label>
+          <input type="text" class="form-control" name="price" id="price">
+        </div>
+        <div class="row col-md-4">
+          <div class="form-group col-md-6">
+            <label for="logo">Medicine image</label>
+            <input type="file" class="form-control-file" name="image" id="image" onchange="loadImage(event)">
+          </div>
+          <div class="form-group col-md-6 text-center" style="height: 62px;">
+            <img id="previewLogo" style="height: 100%;">
+          </div>
+        </div>
+        <div class="form-group col-md-2 align-self-md-center">
+          <button type="button" class="btn btn-primary col-md-12" style="width: 100%;" id="submitNewMedicine" value="<%= pharmacyID %>"> + Add Medicine</button>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    
+    <div class="col-md-10 text-left">
+      <h4 class="display-4"> All Medicines</h4>
+    </div>
+
+
+  </div>
+
+
+
+  <script>
+
+    var loadImage = function(event) {
+        var previewLogo = document.getElementById('previewLogo');
+        previewLogo.src = URL.createObjectURL(event.target.files[0]);
+        previewLogo.onload = function() {
+          URL.revokeObjectURL(previewLogo.src) // free memory
+        }
+      };
+    
+    
+    </script>
+
+    
+       
+  </body>
+
+
+
+
+</html>
