@@ -58,7 +58,7 @@ router.get('/updatePharmacy/:id', (req, res) => {
         accountID:Object.keys(accountSnapshot.val())[0]
       }
       )
-    });
+    })
     
   });
   
@@ -95,19 +95,25 @@ router.get('/viewPharmacy/:pharmacyID', (req, res) => {
   
   var ref = database.ref("Pharmacies/"+pharmacyId)
   ref.once("value", function(pharmacySnapshot) {
+    
     ref = database.ref("Accounts/").orderByChild("pharmacyID").equalTo(pharmacyId)
-    
     ref.once("value", function(accountSnapshot) {
-      res.render("./pharmacy/viewPharmacy", 
-      {
-        pharmacy:pharmacySnapshot.toJSON(), 
-        account:accountSnapshot.toJSON()[Object.keys(accountSnapshot.toJSON())[0]],
-        pharmacyID:pharmacyId
-      }
-      )
-    });
+      
+      ref = database.ref("Medicine/").orderByChild("pharmacyID").equalTo(pharmacyId)
+      ref.once("value", function(medicineSnapshot) {
+        res.render("./pharmacy/viewPharmacy", 
+        {
+          pharmacy:pharmacySnapshot.toJSON(), 
+          account:accountSnapshot.toJSON()[Object.keys(accountSnapshot.toJSON())[0]],
+          pharmacyID:pharmacyId,
+          medicines: medicineSnapshot.toJSON()
+        }
+        )
+      })
+    })
     
-  });
+
+  })
   
 });
 
@@ -117,8 +123,18 @@ router.get('/viewPharmacy/:pharmacyID', (req, res) => {
 
 
   
-router.get('/addMedicine/:pharmacyID', (req, res) => {
-  res.render("./pharmacy/addMedicine", {pharmacyID:req.params.pharmacyID})
+router.get('/deleteMedicine/:medicineID', (req, res) => {
+  const medicineID = req.params.medicineID;
+
+  var database = admin.database();
+  
+  var ref = database.ref("Medicine/"+medicineID);
+  ref.once("value").then((medicine)=>{
+    pharmacyId = medicine.val()["pharmacyID"]
+
+    database.ref("Medicine/"+medicineID).update({active:false})
+    .then(()=> res.redirect("/pharmacy/viewPharmacy/"+pharmacyId))
+  })
 });
 
 

@@ -34,8 +34,9 @@ function submitNewPharmacy() {
     
     
     // create new user account for pharmacy to able to login 
-    createUserWithEmailAndPassword(auth, email, password).then(()=>{
-        
+    createUserWithEmailAndPassword(auth, email, password).then((authObject)=>{
+
+        const uid = authObject.user.uid
         // upload image to storage and then get the image URL
         
         var file = document.getElementById("logo").files[0];
@@ -44,7 +45,7 @@ function submitNewPharmacy() {
         
         uploadBytes(storage_Ref, file).then(() => {
             getDownloadURL(storage_Ref).then((url)=>
-                createNewPharmacyAccount(insta, pharmacyName,url,twitter, drName, email, phone)
+                createNewPharmacyAccount(uid, insta, pharmacyName,url,twitter, drName, email, phone)
             )    
         })
     })
@@ -65,7 +66,7 @@ function submitNewPharmacy() {
 
 
 
-function createNewPharmacyAccount(instaAccount, name, pic, twitterAccount, drName, email, phone) {
+function createNewPharmacyAccount(uid, instaAccount, name, pic, twitterAccount, drName, email, phone) {
     const database = getDatabase(firebfase_app);
     
     push( databaseRef(database, 'Pharmacies/'), 
@@ -77,16 +78,16 @@ function createNewPharmacyAccount(instaAccount, name, pic, twitterAccount, drNam
             twitterAccount:twitterAccount
         }
     ).then((pharmacy)=>{
-        createNewParmacyDetailAccount(drName, email, phone, pharmacy.key)
+        createNewParmacyDetailAccount(uid, drName, email, phone, pharmacy.key)
     });
 }
 
 
 
-function createNewParmacyDetailAccount(drName, email, phone, pharmacyID) {
+function createNewParmacyDetailAccount(uid, drName, email, phone, pharmacyID) {
     const database = getDatabase(firebfase_app);
     
-    push( databaseRef(database, 'Accounts/'), 
+    set( databaseRef(database, 'Accounts/'+uid), 
         {
             email: email,
             name: drName, 

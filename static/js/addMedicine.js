@@ -46,61 +46,13 @@ function submitNewMedicine() {
                 }
             ).then((medicine)=>{
                 submitBtn.disabled = false
-                document.getElementById("name").value = "";
-                document.getElementById("price").value = "";
-                document.getElementById("image").value = "";
-                document.getElementById("previewLogo").src = "";
-                console.log(medicine)
+                window.location.reload()
             })
         )    
     })
     
     
     
-    // --------------------------------------------------------------------
-    
-    
 
 
-}
-
-
-
-function createNewPharmacyAccount(instaAccount, name, pic, twitterAccount, drName, email, phone) {
-    const database = getDatabase(firebfase_app);
-    
-    push( databaseRef(database, 'Pharmacies/'), 
-        {
-            active: true,
-            instaAccount: instaAccount, 
-            name: name, 
-            pic: pic, 
-            twitterAccount:twitterAccount
-        }
-    ).then((pharmacy)=>{
-        createNewParmacyDetailAccount(drName, email, phone, pharmacy.key)
-    });
-}
-
-
-
-function createNewParmacyDetailAccount(drName, email, phone, pharmacyID) {
-    const database = getDatabase(firebfase_app);
-    
-    push( databaseRef(database, 'Accounts/'), 
-        {
-            email: email,
-            name: drName, 
-            phone: phone, 
-            pharmacyID:pharmacyID,
-            accountType: "PHARMACY", 
-            active:true
-        }
-    ).then((f)=>{
-        
-        submitBtn.disabled = false
-        console.log("Added >>")
-        window.location = "/pharmacy/"
-
-    });
 }
