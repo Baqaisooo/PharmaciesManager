@@ -1,7 +1,7 @@
 
 
 import firebfase_app from "./firebaseConfig.js";
-import { onAuthStateChanged, getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js";
+import { onAuthStateChanged, getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js";
 
 
 const auth = getAuth(firebfase_app);
