@@ -6,12 +6,12 @@ import { getDatabase, ref as databaseRef, update } from "https://www.gstatic.com
 
 
 
-const element = document.getElementById("submitUpdatePharmacy");
+const submitBtn = document.getElementById("submitUpdatePharmacy");
 
-element.addEventListener("click", submitUpdatePharmacy);
+submitBtn.addEventListener("click", submitUpdatePharmacy);
 
 function submitUpdatePharmacy() {
-    const [accountID, pharmacyID] = (element.value).split(" ");
+    const [accountID, pharmacyID] = (submitBtn.value).split(" ");
     const oldLogo = document.getElementById("oldLogo").value;
     const pharmacyName = document.getElementById("pharmacy").value;
     const insta = document.getElementById("insta").value;
@@ -19,7 +19,8 @@ function submitUpdatePharmacy() {
     const drName = document.getElementById("drName").value;
     const phone = document.getElementById("phone").value;
 
-
+    submitBtn.disabled = true
+    submitBtn.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Updating Pharmacy . . .`;
     // --------------------------------------------------------------------
     
 
@@ -49,7 +50,11 @@ function submitUpdatePharmacy() {
                 name: pharmacyName, 
                 twitterAccount:twitter
             }
-            ).then(location.href = "/pharmacy/").catch((error)=> console.log(error.message))
+            ).then(()=>{
+                submitBtn.innerHTML = `Updated Successfully`;
+                location.href = "/pharmacy/"
+            })
+            .catch((error)=> console.log(error.message))
             
         ).catch((error)=> console.log(error.message))
         
@@ -73,7 +78,11 @@ function submitUpdatePharmacy() {
                         pic: url, 
                         twitterAccount:twitter
                     }
-                    ).then(location.href = "/pharmacy/").catch((error)=> console.log(error.message))
+                    ).then(()=>{
+                        submitBtn.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i> Updated Successfully`;
+                        location.href = "/pharmacy/"
+                    })
+                    .catch((error)=> console.log(error.message))
                     
                 ).catch((error)=> console.log(error.message))
                 

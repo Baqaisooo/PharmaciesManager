@@ -6,18 +6,20 @@ import { getDatabase, ref as databaseRef, update } from "https://www.gstatic.com
 
 
 
-const element = document.getElementById("updateMedicine");
+const submitBtn = document.getElementById("updateMedicine");
 
-element.addEventListener("click", submitUpdateMedicine);
+submitBtn.addEventListener("click", submitUpdateMedicine);
 
 function submitUpdateMedicine() {
-    const medicineID = element.value;
+    const medicineID = submitBtn.value;
     const pharmacyName = document.getElementById("pharmacy_name").innerHTML;
     const oldLogo = document.getElementById("oldLogo").value;
     const updatedName = document.getElementById("updatedName").value;
     const updatedPrice = document.getElementById("updatedPrice").value;
 
-
+    console.log("GGGGGGGGGGGGG")
+    submitBtn.disabled = true
+    submitBtn.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Updating Medicine . . .`;
     // --------------------------------------------------------------------
     
 
@@ -40,38 +42,31 @@ function submitUpdateMedicine() {
             price: updatedPrice,
         }
         )
-        .then(location.reload())
+        .then(()=>{
+            submitBtn.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i> Updated Successfully`;
+            location.reload()
+        })
         .catch((error)=> console.log(error.message))
             
     }
     else{
-        uploadBytes(storage_Ref, updatedImage).then(() => {
+        uploadBytes(storage_Ref, updatedImage).then(() =>
             getDownloadURL(storage_Ref).then((url)=>
-            
-                update( databaseRef(getDatabase(firebfase_app), 'Medicine/'+medicineID), 
-                {
-                    name: drName, 
-                    phone: phone
-                }
-                ).then(()=>
                 
-                    update( databaseRef(getDatabase(firebfase_app), 'Pharmacies/'+pharmacyID), 
+                update( databaseRef(getDatabase(firebfase_app), 'Medicine/'+medicineID), 
                     {
-                        name: drName, 
-                        phone: phone,
+                        name: updatedName, 
+                        price: updatedPrice,
                         pic: url
                     }
-                    )
-                    .then(location.reload())
-                    .catch((error)=> console.log(error.message))
-                    
-                ).catch((error)=> console.log(error.message))
-                
-                
-                
-            ).catch((error)=> console.log(error.message))    
-        });       
-        
+                )
+                .then(()=>{
+                    submitBtn.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i> Updated Successfully`;
+                    location.reload()
+                })
+                .catch((error)=> console.log(error.message))
+            )
+        )
     }
             
 }

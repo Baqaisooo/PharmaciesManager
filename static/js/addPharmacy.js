@@ -23,6 +23,7 @@ function submitNewPharmacy() {
     const phone = document.getElementById("phone").value;
 
     submitBtn.disabled = true
+    submitBtn.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Adding Pharmacy . . .`;
     // --------------------------------------------------------------------
     
 
@@ -54,6 +55,7 @@ function submitNewPharmacy() {
         submitBtn.disabled = false
         document.getElementById("alert").style.display = "";
         document.getElementById("errormsg").innerHTML = error.message;
+        submitBtn.innerHTML = `Add Pharmacy`;
     });
     
     
@@ -98,7 +100,7 @@ function createNewParmacyDetailAccount(uid, drName, email, phone, pharmacyID) {
         }
     ).then((f)=>{
         
-        submitBtn.disabled = false
+        submitBtn.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i> Successfully Added`;
         console.log("Added >>")
         window.location = "/pharmacy/"
 

@@ -17,6 +17,7 @@ function submitNewMedicine() {
     const price = document.getElementById("price").value;
 
     submitBtn.disabled = true
+    submitBtn.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Adding Medicine . . .`;
     // --------------------------------------------------------------------
     
     const storage = getStorage(firebfase_app);
@@ -46,6 +47,8 @@ function submitNewMedicine() {
                 }
             ).then((medicine)=>{
                 submitBtn.disabled = false
+                submitBtn.innerHTML = `<i class="fa fa-thumbs-up" aria-hidden="true"></i> Successfully Added`;
+
                 window.location.reload()
             })
         )    
