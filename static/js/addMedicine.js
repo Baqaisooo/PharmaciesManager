@@ -14,7 +14,7 @@ function submitNewMedicine() {
     
     const pharmacyid = submitBtn.value;
     const name = document.getElementById("name").value;
-    const price = document.getElementById("price").value;
+    const price = parseFloat(document.getElementById("price").value);
 
     submitBtn.disabled = true
     submitBtn.innerHTML = `<i class="fa fa-spinner fa-spin"></i> Adding Medicine . . .`;
