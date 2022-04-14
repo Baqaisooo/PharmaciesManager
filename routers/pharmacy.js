@@ -125,13 +125,13 @@ router.get('/viewPharmacy/:pharmacyID', (req, res) => {
   
 router.get('/deleteMedicine/:medicineID', (req, res) => {
   const medicineID = req.params.medicineID;
-
+  
   var database = admin.database();
   
   var ref = database.ref("Medicine/"+medicineID);
   ref.once("value").then((medicine)=>{
     pharmacyId = medicine.val()["pharmacyID"]
-
+    
     database.ref("Medicine/"+medicineID).update({active:false})
     .then(()=> res.redirect("/pharmacy/viewPharmacy/"+pharmacyId))
   })
@@ -139,6 +139,14 @@ router.get('/deleteMedicine/:medicineID', (req, res) => {
 
 
 
+
+// =============================== Client Routers ==========================================
+
+
+  
+router.get('/newClient', (req, res) => {
+  res.render("./client/newClient")
+});
 
 
 
