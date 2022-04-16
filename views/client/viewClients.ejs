@@ -25,7 +25,7 @@
 
   </head>
   <body>
-    
+     
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
   <div class="container-fluid">
     <a class="navbar-brand" href="/pharmacy">
@@ -57,35 +57,56 @@
 
 <div class="container">
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">All Pharmacies</h1>
+        <h1 class="display-4">All Clients</h1>
     </div>
 
 
 
-    <% for (const pharmacykey in pharmacies) {
+    <%
+      var counter = 1; 
+      for (const clientkey in clients) {
      
-        const element = pharmacies[pharmacykey];
+        const element = clients[clientkey];
         if (element.active) {
         %>
           <div class="row border border-success rounded mb-1">
-              <div class="col-md-2 text-center"><img style="width: 100%;" src="<%= element.pic %>" alt="Al-Nahdi Care" height="100"></div>
-              <div class="col-md-3 align-self-md-center"><strong> <%= element.name %> </strong></div>
-              <div class="col-md-2 align-self-md-center">
-                  <div class="row">
-                      <div class="col-md-6"><a href="https://twitter.com/<%= element.twitterAccount %>/" target="_blank"><img style="width: 100%;" src="/images/twitterIcon.png" alt="Twitter"></a></div>
-                      <div class="col-md-6 "><a href="https://www.instagram.com/<%= element.instaAccount %>/" target="_blank"><img style="width: 100%;" src="/images/instagramIcon.png" alt="Instagram"></a></div>
-                  </div>
+
+              <div class="col-md-1 align-self-md-center">
+                <h5><%=counter++%></h5>
               </div>
-              <div class="col-md-5 align-self-md-center">
+              <div class="col-md-4 align-self-md-center" style="border-left: black 2px solid;">
+                <div class="row">
+                  <div class="col-md-12">
+                    <strong> Name : </strong> <%= element.name %>
+                  </div>
+                  <div class="col-md-12">
+                    <strong> E-mail : </strong> <%= element.email %>
+                    
+                  </div>
+                  
+                </div>
+              </div>
+
+              <div class="col-md-3 align-self-md-center">
+                <div class="row">
+                  <div class="col-md-12">
+                    <strong> Phone : </strong> <%= element.phone %>
+                  </div>
+                  <div class="col-md-12">
+                    <strong> ID # : </strong> <%= element.ID_number %>
+                    
+                  </div>
+                  
+                </div>
+              </div>
+              
+              <div class="col-md-4 align-self-md-center">
                   <div class="row">
-                      <div class="col-md-4">
-                          <a type="button" class="btn btn-info w-100" id="view" href="/pharmacy/viewPharmacy/<%= pharmacykey %>">View</a>
+                      <div class="col-md-6">
+                          <a type="button" class="btn btn-warning w-100" id="edit" href="/client/updateClient/<%= clientkey %>">Update</a>
                       </div>
-                      <div class="col-md-4">
-                          <a type="button" class="btn btn-warning w-100" id="edit" href="/pharmacy/updatePharmacy/<%= pharmacykey %>">Update</a>
-                      </div>
-                      <div class="col-md-4">
-                          <a type="button" class="btn btn-danger w-100"  id="delete" href="/pharmacy/deletePharmacy/<%= pharmacykey %>">Delete</a>
+                      <div class="col-md-6">
+                          <a type="button" class="btn btn-danger w-100"  id="delete" href="/client/deleteClient/<%= clientkey %>">Delete</a>
                       </div>
                   </div>
               </div>

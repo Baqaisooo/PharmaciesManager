@@ -35,7 +35,7 @@
       </style>
   </head>
   <body>
-    
+   
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
   <div class="container-fluid">
     <a class="navbar-brand" href="/pharmacy">
@@ -50,14 +50,16 @@
           <a class="nav-link active" aria-current="page" href="/pharmacy">Home</a>
         </li>
 
-        <li class="nav-item ml-3" style="margin-left: 10px;">
-          <a type="button" class="btn btn-warning" style="font-weight: bold;" href="/pharmacy/newClient">Add New Client</a>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/client">View Clients</a>
+        </li>
+
       </ul>
-      <div class="d-flex">
-        <button type="button" class="btn btn-danger" id="logout">Logout</button>
+      <form class="d-flex">
+        <a type="button" class="btn btn-warning" style="font-weight: bold; margin-right: 15px;" href="/client/newClient">Add New Client</a>
+        <button type="button" class="btn btn-danger" id="logout" >Logout</button>
         
-      </div>
+      </form>
     </div>
   </div>
 </nav>

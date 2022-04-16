@@ -38,35 +38,35 @@
   </head>
   <body>
     
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/pharmacy">
-      <img src="/images/projectLogo.jpeg" alt="Pharmacy Manager" height="65">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/pharmacy">Home</a>
-        </li>
-
-        <li class="nav-item ml-3">
-          <a type="button" class="btn btn-primary" style="font-weight: bold;" href="/pharmacy/newPharmacy">Add New Pharmacy</a>
-      </li>
-
-      <li class="nav-item ml-3" style="margin-left: 10px;">
-        <a type="button" class="btn btn-warning" style="font-weight: bold;" href="/pharmacy/newClient">Add New Client</a>
-    </li>
-      </ul>
-      <div class="d-flex">
-        <button type="button" class="btn btn-danger" id="logout">Logout</button>
-        
+  
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/pharmacy">
+          <img src="/images/projectLogo.jpeg" alt="Pharmacy Manager" height="65">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/pharmacy">Home</a>
+            </li>
+    
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/client">View Clients</a>
+            </li>
+    
+          </ul>
+          <form class="d-flex">
+            <a type="button" class="btn btn-primary" style="font-weight: bold; margin-right: 15px;" href="/pharmacy/newPharmacy">Add New Pharmacy</a>
+            <a type="button" class="btn btn-warning" style="font-weight: bold; margin-right: 15px;" href="/client/newClient">Add New Client</a>
+            <button type="button" class="btn btn-danger" id="logout" >Logout</button>
+            
+          </form>
+        </div>
       </div>
-    </div>
-  </div>
-</nav>
+    </nav>
 
 <div class="container">
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">

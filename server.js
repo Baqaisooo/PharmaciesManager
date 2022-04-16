@@ -18,6 +18,9 @@ app.use(express.static('static'))
 const pharmacyRouter = require("./routers/pharmacy");
 app.use('/pharmacy',pharmacyRouter);
 
+const clientRouter = require("./routers/client");
+app.use('/client',clientRouter);
+
 
 
 

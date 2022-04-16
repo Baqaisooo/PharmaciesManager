@@ -140,18 +140,4 @@ router.get('/deleteMedicine/:medicineID', (req, res) => {
 
 
 
-// =============================== Client Routers ==========================================
-
-
-  
-router.get('/newClient', (req, res) => {
-  res.render("./client/newClient")
-});
-
-
-
-
-
-
-
 module.exports = router

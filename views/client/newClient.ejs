@@ -36,6 +36,7 @@
   </head>
   <body>
     
+    
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
   <div class="container-fluid">
     <a class="navbar-brand" href="/pharmacy">
@@ -49,16 +50,17 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/pharmacy">Home</a>
         </li>
-        
-        <li class="nav-item ml-3">
-          <a type="button" class="btn btn-primary" style="font-weight: bold;" href="/pharmacy/newPharmacy">Add New Pharmacy</a>
-      </li>
+
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/client">View Clients</a>
+        </li>
 
       </ul>
-      <div class="d-flex">
-        <button type="button" class="btn btn-danger" id="logout">Logout</button>
+      <form class="d-flex">
+        <a type="button" class="btn btn-primary" style="font-weight: bold; margin-right: 15px;" href="/pharmacy/newPharmacy">Add New Pharmacy</a>
+        <button type="button" class="btn btn-danger" id="logout" >Logout</button>
         
-      </div>
+      </form>
     </div>
   </div>
 </nav>
@@ -87,46 +89,22 @@
       </div>
 
       <br>
-       
-      <div class="form-group">
-        <label for="pharmacy">Pharmacy Name</label>
-        <input type="text" class="form-control" name="pharmacy" id="pharmacy">
-      </div>
-
-      <br>
 
       <div class="row">
-        <div class="form-group col-md-4">
-          <label for="insta">Instagram Account</label>
-          <input type="text" class="form-control" name="insta" id="insta">
+        <div class="form-group col-md-5">
+          <label for="name">Client Name</label>
+          <input type="text" class="form-control" name="name" id="name">
         </div>
         <div class="form-group col-md-4">
-          <label for="twitter">Twitter Account</label>
-          <input type="text" class="form-control" name="twitter" id="twitter">
-        </div>
-        <div class="row col-md-4">
-          <div class="form-group col-md-6">
-            <label for="logo">Pharmacy Logo</label>
-            <input type="file" class="form-control-file" name="logo" id="logo" onchange="loadImage(event)">
-          </div>
-          <div class="form-group col-md-6 text-center" style="height: 62px;">
-            <img id="previewLogo" style="height: 100%;">
-          </div>
-        </div>
-      </div>
-
-      <br>
-
-      <div class="row">
-        <div class="form-group col-md-6">
-          <label for="drName">Doctor Name</label>
-          <input type="text" class="form-control" name="drName" id="drName">
-        </div>
-        <div class="form-group col-md-6">
           <label for="phone">Phone Number</label>
           <input type="number" class="form-control" name="phone" id="phone">
         </div>
+        <div class="form-group col-md-3">
+          <label for="ID_number">ID Number</label>
+          <input type="number" class="form-control" name="ID_number" id="ID_number">
+        </div>
       </div>
+
       
       <br><br>
       
@@ -134,7 +112,7 @@
         <div class="form-group col-md-4">
         </div>
         <div class="form-group col-md-4">
-          <button type="button" class="btn btn-primary col-md-6" style="width: 100%;" id="submitNewPharmacy">Add Pharmacy</button>
+          <button type="button" class="btn btn-primary col-md-6" style="width: 100%;" id="submitNewClient">Add Client</button>
           
         </div>
         <div class="form-group col-md-4">
@@ -149,22 +127,6 @@
 </div>
        
       
-
-<script>
-
-var loadImage = function(event) {
-    var previewLogo = document.getElementById('previewLogo');
-    previewLogo.src = URL.createObjectURL(event.target.files[0]);
-    previewLogo.onload = function() {
-      URL.revokeObjectURL(previewLogo.src) // free memory
-    }
-  };
-
-
-</script>
-
-
-
 
   </body>
 
