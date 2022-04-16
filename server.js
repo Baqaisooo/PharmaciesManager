@@ -21,6 +21,9 @@ app.use('/pharmacy',pharmacyRouter);
 const clientRouter = require("./routers/client");
 app.use('/client',clientRouter);
 
+const suggestionRouter = require("./routers/suggestion");
+app.use('/suggestion',suggestionRouter);
+
 
 
 
