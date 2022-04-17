@@ -14,6 +14,6 @@ In cmd execute the following
  `git clone https://github.com/Baqaisooo/PharmaciesManager.git`
 2. `cd PharmaciesManager` the get into the project folder
 3. run this code to install all dependencies `npm install`
-4. Now, it it time to run server `node server.js`
+4. Now, it it time to run server `npm run devStart`
 
 to access the website go to http://localhost:3000/
